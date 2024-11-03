@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
 import Header from "./components/Header/Header";
+import Prom from "./components/prom/Prom";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -15,6 +16,7 @@ function App() {
     <>
       <Container>
         <Header />
+        <Prom />
       </Container>
     </>
   );
