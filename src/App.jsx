@@ -1,22 +1,25 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-
 import { Container } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Routes, Route, useLocation } from "react-router-dom";
 
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+
 import Header from "./components/Header/Header";
-import Prom from "./components/prom/Prom";
+import Prom from "./components/Prom/Prom";
+import Home from "./pages/Home"; // Убедитесь, что путь к компоненту правильный
 
 function App() {
-  const [count, setCount] = useState(0);
+  const location = useLocation();
 
   return (
     <>
       <Container>
         <Header />
-        <Prom />
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Home />} />
+          <Route path="/prom" element={<Prom />} /> {/* Добавлено как пример маршрута */}
+        </Routes>
       </Container>
     </>
   );
