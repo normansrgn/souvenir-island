@@ -1,10 +1,14 @@
 .search {
-    padding: 25px 0px 25px 0px;
-    border-bottom: 3px solid #7a876c;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 0px 25px 0px;
+  border-bottom: 3px solid #7a876c;
   &__input {
     width: 350px;
     padding: 10px;
     border-radius: 15px;
+    background: none;
     border: 3px solid #7a876c;
     color: #7a876c;
     font-size: 20px;
@@ -13,6 +17,25 @@
       color: #7a876c;
       font-size: 20px;
       font-weight: 600;
+    }
+  }
+
+  &__btns {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__btn {
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 15px;
+    border: 3px solid #7a876c;
+    transition: 0.2s ease-in-out;
+    &:hover {
+      background-color: #7a876c;
+      color: #e8e7e3;
     }
   }
 }
