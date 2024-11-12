@@ -1,0 +1,28 @@
+.prom {
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.prom h2 {
+  text-align: center;
+  font-size: 90px;
+  font-weight: 500;
+  z-index: 1;
+}
+.prom__img-left, .prom__img-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: auto;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.prom__img-left {
+  left: 0;
+}
+.prom__img-right {
+  right: 0;
+}/*# sourceMappingURL=Prom.css.map */

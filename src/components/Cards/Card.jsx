@@ -1,9 +1,9 @@
 import React from "react";
 import "./Cards.scss";
 
-export default function Card({ name, price, image }) {
+export default function Card({ name, price, image, category }) {
     const handleBuy = () => {
-        const product = { name, price, image };
+        const product = { name, price, image, category };
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
         cart.push(product);
         localStorage.setItem("cart", JSON.stringify(cart));
@@ -12,6 +12,7 @@ export default function Card({ name, price, image }) {
 
     return (
         <section className="card">
+            <div className="card__category">{category}</div>
             <img src={image} alt={name} className="card__img" />
             <div className="card__textBlock">
                 <h1>{name}</h1>

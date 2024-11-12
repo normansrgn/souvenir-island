@@ -1,0 +1,48 @@
+.header {
+  padding: 14px;
+  font-size: 22px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  border-bottom: 3px solid #7a876c;
+  justify-content: space-between;
+}
+.header__logo {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.header__logo h1 {
+  color: #7a876c;
+}
+.header__linkList ol {
+  display: flex;
+  gap: 30px;
+}
+.header__linkList ol li {
+  cursor: pointer;
+  color: #7a876c;
+}
+.header__regbtn {
+  cursor: pointer;
+  padding: 14px;
+  border: 3px solid #7a876c;
+  border-radius: 15px;
+  transition: 0.2s ease-in-out;
+}
+.header__regbtn:hover {
+  background-color: #7a876c;
+  color: #e8e7e3;
+}
+.header__links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.header__basketIcon {
+  cursor: pointer;
+  padding: 11px;
+  border: 3px solid #7a876c;
+  border-radius: 15px;
+}/*# sourceMappingURL=header.css.map */

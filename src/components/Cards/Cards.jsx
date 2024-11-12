@@ -1,4 +1,3 @@
-// App.js
 import React, { useState } from "react";
 import Card from "./Card";
 import productsData from "./data"; // Импорт данных из файла data.js
@@ -10,15 +9,18 @@ import "./Cards.scss";
 
 export default function App() {
   const [searchText, setSearchText] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
-  const filteredProducts = productsData.filter((product) =>
-    product.name.toLowerCase().includes(searchText.toLowerCase())
-  );
+  const filteredProducts = productsData.filter((product) => {
+    const matchesSearch = product.name.toLowerCase().includes(searchText.toLowerCase());
+    const matchesCategory = selectedCategory ? product.category === selectedCategory : true;
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <div>
       <Container>
-        <Search onSearch={setSearchText} />
+        <Search onSearch={setSearchText} onCategorySelect={setSelectedCategory} />
         <Row className="product_list">
           {filteredProducts.map((product) => (
             <Card
@@ -26,6 +28,7 @@ export default function App() {
               name={product.name}
               price={product.price}
               image={product.image}
+              category={product.category}
             />
           ))}
         </Row>

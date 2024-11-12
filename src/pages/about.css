@@ -1,0 +1,14 @@
+.about__title h1 {
+  font-size: 116px;
+  margin-top: 40px;
+}
+.about__text {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.about__text p {
+  width: 1164px;
+  font-size: 20px;
+}/*# sourceMappingURL=about.css.map */

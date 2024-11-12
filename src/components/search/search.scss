@@ -2,8 +2,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 25px 0px 25px 0px;
+  padding: 25px 0;
   border-bottom: 3px solid #7a876c;
+
   &__input {
     width: 350px;
     padding: 10px;
@@ -13,6 +14,7 @@
     color: #7a876c;
     font-size: 20px;
     font-weight: 600;
+
     &::placeholder {
       color: #7a876c;
       font-size: 20px;
@@ -33,7 +35,9 @@
     border-radius: 15px;
     border: 3px solid #7a876c;
     transition: 0.2s ease-in-out;
-    &:hover {
+
+    &:hover,
+    &.active {
       background-color: #7a876c;
       color: #e8e7e3;
     }
