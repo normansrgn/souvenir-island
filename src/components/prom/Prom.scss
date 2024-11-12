@@ -1,13 +1,32 @@
 .prom {
     height: 70vh;
-display: flex;
-justify-content: center;
-align-items: center;
-border-bottom: 3px solid #7a876c;
-border-top: 3px solid #7a876c;
-    & h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    h2 {
         text-align: center;
         font-size: 90px;
         font-weight: 500;
+        z-index: 1; // Чтобы текст был выше картинок
+    }
+
+    &__img-left,
+    &__img-right {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: auto;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &__img-left {
+        left: 0;
+    }
+
+    &__img-right {
+        right: 0;
     }
 }
