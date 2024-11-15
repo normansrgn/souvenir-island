@@ -1,6 +1,9 @@
 import React from "react";
 import "./Cards.scss";
 
+import { Container, Row } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 export default function Card({ name, price, image, category }) {
     const handleBuy = () => {
         const product = { name, price, image, category };
@@ -11,7 +14,7 @@ export default function Card({ name, price, image, category }) {
     };
 
     return (
-        <section className="card">
+        <section className="card col-xxl-4 col-sm-6 col-md-9">
             <div className="card__category">{category}</div>
             <img src={image} alt={name} className="card__img" />
             <div className="card__textBlock">

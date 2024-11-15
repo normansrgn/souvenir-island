@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Card from "./Card";
-import productsData from "./data"; // Импорт данных из файла data.js
+import productsData from "./data"; 
 import Search from "../search/Search";
 import { Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
