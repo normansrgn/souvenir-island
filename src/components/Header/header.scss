@@ -56,3 +56,16 @@
 
   }
 }
+
+
+@media (max-width: 995px) {
+  .header__links {
+    display: none;
+  }
+}
+
+@media (max-width: 769px) {
+.header__linkList {
+  display: none;
+}
+}

@@ -24,7 +24,8 @@
 
   &__btns {
     display: flex;
-    gap: 10px;
+flex-wrap: wrap;
+gap: 10px;
   }
 
   &__btn {
@@ -35,11 +36,22 @@
     border-radius: 15px;
     border: 3px solid #7a876c;
     transition: 0.2s ease-in-out;
-
     &:hover,
     &.active {
       background-color: #7a876c;
       color: #e8e7e3;
+    }
+  }
+}
+
+@media (max-width: 996px) {
+  .search {
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+
+    &__input {
+      width: 100%;
     }
   }
 }

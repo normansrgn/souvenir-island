@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./header.scss";
+import BurgerMenu from "../BurgerMenu/BurgerMenu";
 
 export default function Header() {
   return (
@@ -60,6 +61,7 @@ export default function Header() {
             </Link>
             <div className="header__regbtn">Регистрация</div>
           </div>
+          <BurgerMenu />
         </div>
       </Container>
     </>
