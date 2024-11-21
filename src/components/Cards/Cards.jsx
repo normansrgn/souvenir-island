@@ -29,6 +29,7 @@ export default function App() {
               price={product.price}
               image={product.image}
               category={product.category}
+              
             />
           ))}
         </Row>
