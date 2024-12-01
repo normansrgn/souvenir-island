@@ -8,16 +8,16 @@ export default function Search({ onSearch, onCategorySelect }) {
     const handleInputChange = (e) => {
         const value = e.target.value;
         setSearchText(value);
-        onSearch(value); // Вызываем функцию поиска при каждом изменении ввода
+        onSearch(value); 
     };
 
     const handleCategoryClick = (category) => {
         if (activeCategory === category) {
-            setActiveCategory(""); // Сбрасываем активную категорию, если нажата повторно
-            onCategorySelect(""); // Сбрасываем фильтр
+            setActiveCategory(""); 
+            onCategorySelect(""); 
         } else {
             setActiveCategory(category);
-            onCategorySelect(category); // Фильтруем по выбранной категории
+            onCategorySelect(category); 
         }
     };
 

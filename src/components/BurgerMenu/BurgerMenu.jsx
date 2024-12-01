@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./__burgermenu.scss"; // Стили бургер-меню
+import "./__burgermenu.scss"; 
 import { Link } from "react-router-dom";
 
 const BurgerMenu = () => {
@@ -14,7 +14,7 @@ const BurgerMenu = () => {
   };
 
   const closeMenuOnOutsideClick = (e) => {
-    // Если клик произошел вне меню (по фону)
+
     if (e.target.classList.contains("blur-background")) {
       setIsOpen(false);
     }
@@ -22,7 +22,6 @@ const BurgerMenu = () => {
 
   return (
     <div className="burger_menu">
-      {/* Кнопка открытия/закрытия меню */}
       <button id="burger__btn" type="button" onClick={toggleMenu}>
         <span
           id="burgerSpan"

@@ -16,7 +16,6 @@ function App() {
 
   return (
     <>
-      {/* <Container> */}
         <Header />
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
@@ -24,7 +23,6 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/cart" element={<Basket />} />
         </Routes>
-      {/* </Container> */}
     </>
   );
 }
