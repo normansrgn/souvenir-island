@@ -1,12 +1,32 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./header.scss";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
+import { auth } from "../../firebaseConfig"; // Путь к конфигурации Firebase
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 export default function Header() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      console.log("Пользователь вышел из аккаунта");
+    } catch (error) {
+      console.error("Ошибка выхода:", error.message);
+    }
+  };
+
   return (
     <>
       <Container>
@@ -59,7 +79,67 @@ export default function Header() {
                 </svg>
               </div>
             </Link>
-            <div className="header__regbtn">Регистрация</div>
+            {user ? (
+              <Link to={`/user/${user.uid}`}>
+                <div className="header__profile">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    fill="rgba(255,254,254,1)"
+                  >
+                    {/* Gradient для иконки */}
+                    <defs>
+                      <linearGradient
+                        id="gradient"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
+                      >
+                        <stop
+                          offset="0%"
+                          style={{
+                            stopColor: "rgb(6, 193, 252)",
+                            stopOpacity: 1,
+                          }}
+                        />
+                        <stop
+                          offset="33%"
+                          style={{
+                            stopColor: "rgb(172, 66, 255)",
+                            stopOpacity: 1,
+                          }}
+                        />
+                        <stop
+                          offset="57%"
+                          style={{
+                            stopColor: "rgb(255, 0, 214)",
+                            stopOpacity: 1,
+                          }}
+                        />
+                        <stop
+                          offset="90%"
+                          style={{
+                            stopColor: "rgb(255, 0, 61)",
+                            stopOpacity: 1,
+                          }}
+                        />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"
+                      fill="#7a876c"
+                    ></path>
+                  </svg>
+                </div>
+              </Link>
+            ) : (
+              <Link to="/reg">
+                <div className="header__regbtn">Регистрация</div>
+              </Link>
+            )}
           </div>
           <BurgerMenu />
         </div>
