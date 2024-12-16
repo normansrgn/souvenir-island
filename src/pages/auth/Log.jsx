@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import "./reglog.scss";
 import { Container } from "react-bootstrap";
 
+import { Link } from "react-router-dom";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,14 +17,11 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      // Аутентификация пользователя с помощью электронной почты и пароля
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("Пользователь вошел в систему:", userCredential.user);
 
-      // Перенаправление пользователя на страницу профиля после успешного входа
       navigate(`/user/${userCredential.user.uid}`);
 
-      // Очистка формы и ошибок
       setEmail("");
       setPassword("");
       setError("");
@@ -33,10 +32,10 @@ export default function Login() {
   };
 
   return (
-    <section className="login">
-      <Container className="login__container">
-        <h1 className="login__title">Вход в аккаунт</h1>
-        <form onSubmit={handleLogin} className="login__form">
+    <section className="reg">
+      <Container className="reg__container">
+        <h1 className="reg__title">Вход в аккаунт</h1>
+        <form onSubmit={handleLogin} className="reg__form">
           <input
             type="email"
             placeholder="Email"
@@ -49,9 +48,16 @@ export default function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit">Войти</button>
+          <button className="reg__btn" type="submit">Войти</button>
+          <div className="reg__underButton">
+            или{" "}
+            <Link to="/reg">
+              <span>зарегистрироваться</span>
+            </Link>{" "}
+            если нет аккаунта
+          </div>
         </form>
-        {error && <p className="login__error">{error}</p>}
+        {error && <p className="reg__error">{error}</p>}
       </Container>
     </section>
   );
