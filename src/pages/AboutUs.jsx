@@ -42,6 +42,28 @@ export default function AboutUs() {
               вкладом в сохранение уникальных ремесел.
             </p>
           </div>
+
+          <section className="about__contacts">
+            <div className="about__contactsTitle">Найди нас на карте</div>
+            <iframe
+              className="about__contactsMap"
+              src="https://yandex.ru/map-widget/v1/?um=constructor%3Aa35d09934e9a8b333767ae1bc083654665d8e26456c891a4b61c4c1660d21e8f&amp;source=constructor"
+              width="100%"
+              height="296"
+              frameborder="0"
+            ></iframe>
+
+            <div className="about__contactsUs">
+              <div className="about__contactsUsTitle">Наши контакты</div>
+              <div className="about__contactsUsText">
+                <p>Телефон: +79898221412</p>
+                <p>
+                  Мы в телеграмме: <a className="url" href="https://t.me/vceuzdereva2022 "> https://t.me/vceuzdereva2022 </a>
+                </p>
+                <p>Пролетарская ул., 209, станица Брюховецкая </p>
+              </div>
+            </div>
+          </section>
         </section>
       </Container>
     </>
