@@ -8,7 +8,7 @@ export default function Prom() {
   return (
     <section className="prom">
       <img src={img1} alt="" className="prom__img-left" />
-      <h2>Сувенирная <br /> лавка</h2>
+      <h2> Cувенирный <br /> островок</h2>
       <img src={img2} alt="" className="prom__img-right" />
     </section>
   );

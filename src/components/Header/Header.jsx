@@ -46,8 +46,8 @@ export default function Header() {
                 />
               </svg>
               <h1>
-                Сувенирная <br />
-                лавка
+                Cувенирный <br />
+                островок
               </h1>
             </div>
           </Link>
