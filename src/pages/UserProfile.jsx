@@ -66,7 +66,7 @@ export default function UserProfile() {
               </svg>{" "}
               {user.email}
             </div>
-            <button onClick={handleLogout} className="logout-btn">
+            <button onClick={handleLogout} className="userProfile__logout">
               Выйти
             </button>
           </div>

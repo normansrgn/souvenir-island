@@ -19,4 +19,13 @@
         gap: 2px;
     }
     
+
+    &__logout {
+        background-color: white;
+        color: #7a876c;
+        border: none;
+        border-radius: 19px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
 }
