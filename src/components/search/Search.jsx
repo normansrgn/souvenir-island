@@ -8,16 +8,16 @@ export default function Search({ onSearch, onCategorySelect }) {
     const handleInputChange = (e) => {
         const value = e.target.value;
         setSearchText(value);
-        onSearch(value); 
+        onSearch(value);
     };
 
     const handleCategoryClick = (category) => {
         if (activeCategory === category) {
-            setActiveCategory(""); 
-            onCategorySelect(""); 
+            setActiveCategory("");
+            onCategorySelect("");
         } else {
             setActiveCategory(category);
-            onCategorySelect(category); 
+            onCategorySelect(category);
         }
     };
 

@@ -1,5 +1,7 @@
+
 .header {
   padding: 14px;
+  color: #7a876c !important;
   font-size: 22px;
   font-weight: bold;
   display: flex;
@@ -35,11 +37,12 @@
     padding: 14px;
     border: 3px solid #7a876c;
     border-radius: 15px;
+    color: #7a876c;
     transition: 0.2s ease-in-out;
 
     &:hover {
       background-color: #7a876c;
-      color: #e8e7e3;
+      color: #e8e7e3 ;
     }
   }
 

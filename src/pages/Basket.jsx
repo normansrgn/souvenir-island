@@ -8,13 +8,24 @@ export default function Basket() {
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCartItems(storedCart);
+    setCartItems(storedCart.map(item => ({ ...item, quantity: item.quantity || 1 })));
   }, []);
+
+  const updateCart = (updatedCart) => {
+    setCartItems(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
 
   const removeItem = (indexToRemove) => {
     const updatedCart = cartItems.filter((_, index) => index !== indexToRemove);
-    setCartItems(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    updateCart(updatedCart);
+  };
+
+  const changeQuantity = (index, delta) => {
+    const updatedCart = cartItems.map((item, idx) =>
+      idx === index ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item
+    );
+    updateCart(updatedCart);
   };
 
   return (
@@ -34,13 +45,18 @@ export default function Basket() {
                     />
                     <div className="basket__cardText">
                       <div className="basket__cardTitle">{item.name}</div>
-                      <div className="basket__price">{item.price} ₽</div>
+                      <div className="basket__price">{item.price * item.quantity} ₽</div>
+                      <div className="basket__quantity">
+                        <button onClick={() => changeQuantity(index, -1)}>-</button>
+                        <span>{item.quantity}</span>
+                        <button onClick={() => changeQuantity(index, 1)}>+</button>
+                      </div>
                     </div>
                   </div>
                   <button onClick={() => removeItem(index)}>X</button>
                 </div>
               ))}
-              <button className="basket__btn">Оформить заказ</button>
+              <button className="basket__btn" onClick={() => window.location.href = "/checkout"}>Оформить заказ</button>
             </ul>
           ) : (
             <p>Корзина пуста</p>
