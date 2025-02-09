@@ -47,7 +47,7 @@ export default function Header() {
             <Link to={"/"}>
               <li>Главная</li>
             </Link>
-            <Link to="/cart">
+            <Link to="/">
               <li>Каталог</li>
             </Link>
             <Link to={"/about"}>
