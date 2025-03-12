@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import emailjs from "emailjs-com";
 import { Container, Form, Button, Modal } from "react-bootstrap";
+import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
+import "./checkout.scss";
+import "../../pages/basket.scss"
 
 export default function Checkout() {
     const [cartItems, setCartItems] = useState([]);
@@ -62,40 +65,70 @@ export default function Checkout() {
 
     return (
         <section className="checkout">
-            <Container>
+            <Container className="checkout__container">
                 <h1 className="checkout__title">Оформление заказа</h1>
                 {cartItems.length > 0 ? (
-                    <div>
-                        <ul className="checkout__list">
-                            {cartItems.map((item, index) => (
-                                <li key={index} className="checkout__item">
-                                    {item.name} (x{item.quantity || 1}) - {item.price * (item.quantity || 1)} ₽
-                                </li>
-                            ))}
-                        </ul>
-                        <h3>Итого: {cartItems.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0)} ₽</h3>
+                    <div className="checkout__insidecont">
+                        <div className="checkout__formTitle">Личные данные</div>
+                        <div className="checkout__cont">
+                            <div className="checkout__datas">
+                                <Form onSubmit={handleSubmit} className="checkout__form">
+                                    <div className="checkout__personalDate">
+                                        <Form.Group>
+                                            <Form.Control type="text" name="name" placeholder="Имя и Фамилия" value={formData.name} onChange={handleInputChange} required />
+                                        </Form.Group>
 
-                        <Form onSubmit={handleSubmit} className="checkout__form">
-                            <Form.Group>
-                                <Form.Label>Имя</Form.Label>
-                                <Form.Control type="text" name="name" value={formData.name} onChange={handleInputChange} required />
-                            </Form.Group>
+                                        <Form.Group>
+                                            <Form.Control type="tel" name="phone" placeholder="Номер телефона" value={formData.phone} onChange={handleInputChange} required />
+                                        </Form.Group>
+                                    </div>
+                                    <div className="checkout__delivery">
+                                        <div className="checkout__formTitle">Доставка</div>
 
-                            <Form.Group>
-                                <Form.Label>Телефон</Form.Label>
-                                <Form.Control type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required />
-                            </Form.Group>
+                                        <Form.Group>
+                                            <Form.Control type="text" name="address" placeholder="Адрес доставки" value={formData.address} onChange={handleInputChange} required />
+                                        </Form.Group>
+                                    </div>
+                                </Form>
+                            </div>
 
-                            <Form.Group>
-                                <Form.Label>Адрес</Form.Label>
-                                <Form.Control type="text" name="address" value={formData.address} onChange={handleInputChange} required />
-                            </Form.Group>
+                            <div className="checkout__tovars">
+                                <ul className="checkout__list">
+                                    {cartItems.map((item, index) => (
+                                        <li key={index} className="checkout__item">
+                                            {/* Разделяем разметку товара на картинку и текстовые данные */}
+                                            <div className="checkout__itemImageContainer">
+                                                <img src={item.image} alt={item.name} className="checkout__itemImage" />
+                                                <div className="checkout__titleblock">
+                                                    <div className="checkout__itemName">{item.name}</div>
 
-                            <Button type="submit" className="checkout__btn">Оформить заказ</Button>
-                        </Form>
+                                                    <div className="checkout__itemQuantity">Количество: {item.quantity || 1}</div>
+                                                </div>
+                                            </div>
+                                            <div className="checkout__itemDetails">
+
+                                            </div>
+                                            <div className="checkout__itemPrice">{item.price * (item.quantity || 1)} ₽</div>
+
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                <div className="checkout__totalPrice">Итого: {cartItems.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0)} ₽</div>
+                                <button onClick={handleSubmit} className="checkout__butn">
+                                    Оформить заказ
+                                </button>
+
+                            </div>
+                        </div>
                     </div>
                 ) : (
-                    <p>Корзина пуста</p>
+                    <Container className="pustbasket">
+                        <div className="pustbasket__title">Ваша корзина пуста</div>
+                        <Link to="/">
+                            <button>Перейти к покупкам</button>
+                        </Link>
+                    </Container>
                 )}
             </Container>
 

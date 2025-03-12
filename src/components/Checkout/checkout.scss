@@ -1,0 +1,112 @@
+.checkout {
+  &__container {
+
+    height: 70vh;
+    margin-top: 80px;
+  }
+
+  &__cont {
+    justify-content: space-between;
+    display: flex;
+    align-items: start;
+    gap: 100px;
+  }
+
+  &__insidecont {
+    margin-top: 70px;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 27px;
+
+    & input {
+      font-size: 19px;
+      padding: 19px;
+      width: 540px;
+      max-width: 100%;
+      margin-top: 20px;
+
+      &::placeholder {
+        font-size: 19px;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &__totalPrice {
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  &__datas {
+  }
+
+  &__formTitle {
+    font-size: 35px;
+    font-weight: bold;
+  }
+
+  &__butn {
+    margin-top: 20px;
+    width: 250px;
+    padding: 19px;
+    border-radius: 15px;
+    background-color: #79876b;
+    color: white;
+    font-size: 19px;
+    font-weight: 600;
+    border: 2px solid #79876b;
+    transition: 0.3s ease;
+  }
+
+  &__titleblock {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__item {
+    font-size: 19px;
+    font-weight: bold;
+    justify-content: space-between;
+    padding: 15px;
+    border: 2px solid #79876b;
+    border-radius: 19px;
+    display: flex;
+    width: 650px;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+  }
+
+  &__itemDetails {
+    font-size: 17px;
+    align-items: center;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  &__itemImage {
+    border-radius: 19px;
+    width: 120px;
+  }
+
+  &__itemImageContainer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+}

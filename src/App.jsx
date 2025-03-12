@@ -22,16 +22,18 @@ function App() {
   return (
     <>
       <Header />
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
-        <Route path="/prom" element={<Prom />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/cart" element={<Basket />} />
-        <Route path="/reg" element={<Reg />} />
-        <Route path="/log" element={<Login />} />
-        <Route path="/product/:id" element={<ProductDetail />} /> {/* Добавляем маршрут для страницы товара */}
-        <Route path="checkout" element={<Checkout />} />
-      </Routes>
+      <main>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Home />} />
+          <Route path="/prom" element={<Prom />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/cart" element={<Basket />} />
+          <Route path="/reg" element={<Reg />} />
+          <Route path="/log" element={<Login />} />
+          <Route path="/product/:id" element={<ProductDetail />} /> {/* Добавляем маршрут для страницы товара */}
+          <Route path="checkout" element={<Checkout />} />
+        </Routes>
+      </main>
       <Footer />
     </>
   );

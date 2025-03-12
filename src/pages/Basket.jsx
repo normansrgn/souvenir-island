@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./basket.scss";
 import { Container } from "react-bootstrap";
+import { Link } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Basket() {
@@ -32,10 +33,11 @@ export default function Basket() {
 
   return (
     <section className="basket">
-      <Container>
-        <h1 className="basket__title">Ваша корзина</h1>
+      <Container >
         {cartItems.length > 0 ? (
-          <ul>
+
+          <div>
+            <h1 className="basket__title">Ваша корзина</h1>
             {cartItems.map((item) => (
               <div className="basket__card" key={item.id}>
                 <div className="basket__cardCont">
@@ -57,9 +59,14 @@ export default function Basket() {
               <h2>Итого: {totalPrice} ₽</h2>
             </div>
             <button className="basket__btn" onClick={() => window.location.href = "/checkout"}>Оформить заказ</button>
-          </ul>
+          </div>
         ) : (
-          <p>Корзина пуста</p>
+          <Container className="pustbasket">
+            <div className="pustbasket__title">Ваша корзина пуста</div>
+            <Link to="/">
+              <button>Перейти к покупкам</button>
+            </Link>
+          </Container>
         )}
       </Container>
     </section>
