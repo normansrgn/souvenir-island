@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Card from "./Card";
 import productsData from "./data";
 import Search from "../search/Search";
@@ -11,6 +11,9 @@ export default function App() {
   const [searchText, setSearchText] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
 
+  // Создаем ref для секции с карточками товаров
+  const cardsRef = useRef(null);
+
   const filteredProducts = productsData.filter((product) => {
     const matchesSearch = product.name.toLowerCase().includes(searchText.toLowerCase());
     const matchesCategory = selectedCategory ? product.category === selectedCategory : true;
@@ -21,11 +24,12 @@ export default function App() {
     <div>
       <Container>
         <Search onSearch={setSearchText} onCategorySelect={setSelectedCategory} />
-        <Row className="product_list">
+        {/* Секция с карточками товаров, к которой будет прокручиваться */}
+        <Row ref={cardsRef} className="product_list">
           {filteredProducts.map((product) => (
             <Card
               key={product.id}
-              id={product.id} // Добавил id
+              id={product.id}
               name={product.name}
               price={product.price}
               image={product.image}

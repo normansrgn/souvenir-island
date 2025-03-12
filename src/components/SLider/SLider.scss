@@ -1,0 +1,58 @@
+.slider {
+    position: relative;
+    width: 970px;
+border-radius: 19px;
+    margin: 0 auto; /* Центрирование слайдера */
+    overflow: hidden; /* Прячем остальные изображения, которые не вмещаются в контейнер */
+    border-radius: 8px; /* Округленные углы */
+  }
+  
+  .slider__images {
+    display: flex;
+    transition: transform 1s ease-in-out; /* Плавный переход для смены слайда */
+  }
+  
+  .slider__image-container {
+    flex-shrink: 0; /* Не сжимаем изображения */
+    width: 100%;
+  }
+  
+  .slider__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover; /* Заполнение контейнера изображением */
+  }
+  
+  /* Кнопки навигации */
+  .slider__button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон кнопок */
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+  }
+  
+  .slider__button:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Увеличиваем насыщенность фона при наведении */
+  }
+  
+  .slider__button.prev {
+    left: 10px; /* Кнопка слева */
+  }
+  
+  .slider__button.next {
+    right: 10px; /* Кнопка справа */
+  }
+  
+  @media (max-width: 768px) {
+    .slider {
+      max-width: 100%; /* Слайдер будет занимать всю ширину экрана на мобильных устройствах */
+    }
+  }

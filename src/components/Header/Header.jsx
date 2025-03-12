@@ -10,6 +10,14 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 export default function Header() {
   const [user, setUser] = useState(null);
 
+  // Ссылка на секцию с карточками товаров
+  const scrollToCatalog = () => {
+    const element = document.getElementById('catalog-section'); // Убедитесь, что вы используете тот же ID
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -47,13 +55,12 @@ export default function Header() {
             <Link to={"/"}>
               <li>Главная</li>
             </Link>
-            <Link to="/">
+            <Link to="#" onClick={scrollToCatalog}>
               <li>Каталог</li>
             </Link>
             <Link to={"/about"}>
               <li>О нас</li>
             </Link>
-
             <Link to={"/materials"}>
               <li>Материалы</li>
             </Link>
@@ -134,15 +141,15 @@ export default function Header() {
           ) : (
             <Link to="/reg">
               <div className="header__regbtn">
-                Войти</div>
+                Войти
+              </div>
             </Link>
-
           )}
         </div>
 
         {/* Бургер меню */}
         <BurgerMenu user={user} onLogout={handleLogout} />
       </div>
-    </Container >
+    </Container>
   );
 }
