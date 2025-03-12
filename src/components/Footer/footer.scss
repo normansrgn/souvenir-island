@@ -1,0 +1,41 @@
+.footer {
+  margin-top: 190px;
+  padding: 120px 0px 60px 0px;
+  //   padding: 25px;
+  background-color: #79876b;
+  color: white !important;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    & h1 {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+
+  &__text {
+    display: flex;
+    gap: 30px;
+  }
+
+  &__textConts {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+
+  }
+
+  &__textContsTitle {
+    font-size: 25px;
+    font-weight: bold;
+  }
+}

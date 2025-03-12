@@ -35,7 +35,7 @@ export default function Checkout() {
             user_phone: formData.phone,
             user_address: formData.address,
             order_details: orderDetails,
-            total_price: cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0) + " ₽",
+            total_price: cartItems.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0) + " ₽",
         };
 
         emailjs
@@ -69,11 +69,11 @@ export default function Checkout() {
                         <ul className="checkout__list">
                             {cartItems.map((item, index) => (
                                 <li key={index} className="checkout__item">
-                                    {item.name} (x{item.quantity}) - {item.price * item.quantity} ₽
+                                    {item.name} (x{item.quantity || 1}) - {item.price * (item.quantity || 1)} ₽
                                 </li>
                             ))}
                         </ul>
-                        <h3>Итого: {cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)} ₽</h3>
+                        <h3>Итого: {cartItems.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0)} ₽</h3>
 
                         <Form onSubmit={handleSubmit} className="checkout__form">
                             <Form.Group>

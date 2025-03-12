@@ -1,0 +1,73 @@
+.productDetail {
+  margin-top: 80px;
+
+  &__container {
+    display: flex;
+    border-left: 5px solid #79876b;
+    border-radius: 19px;
+    padding: 20px;
+    gap: 40px;
+    box-shadow: inset 10px 0 15px -6px rgba(0, 0, 0, 0.25);
+  }
+
+  &__img {
+    & img {
+        box-shadow: inset 10px 0 15px -6px rgba(0, 0, 0, 0.25);
+      border-radius: 19px;
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    & button {
+      width: 250px;
+      padding: 12px;
+      border-radius: 15px;
+      background-color: #79876b;
+      color: white;
+      font-size: 17px;
+      font-weight: 600;
+      border: 2px solid #79876b;
+      transition: 0.3s ease;
+
+      &:hover {
+        background: none;
+        color: #79876b;
+        border: 2px solid #79876b;
+      }
+    }
+  }
+
+  &__Title {
+    font-size: 40px;
+    font-weight: bold;
+  }
+
+  &__price {
+    font-size: 35px;
+    font-weight: 600;
+  }
+
+  &__desc {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__disctitle {
+    font-size: 27px;
+    font-weight: bold;
+  }
+
+  &__disc {
+    font-size: 22px;
+    // width: 100%;
+    max-width: 100%;
+    line-height: 2.2rem;
+    font-weight: 400;
+  }
+}
