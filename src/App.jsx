@@ -15,6 +15,7 @@ import Login from "./pages/auth/Log";
 import Checkout from "./components/Checkout/Checkout";
 import ProductDetail from "./pages/ProductDetail/ProductDetail"; // Импортируем компонент ProductDetail
 import Footer from "./components/Footer/Footer";
+import Meterials from "./pages/Meterials/Meterials";
 
 function App() {
   const location = useLocation();
@@ -24,6 +25,7 @@ function App() {
       <Header />
       <main>
         <Routes location={location} key={location.pathname}>
+          <Route path="materials" element={<Meterials />} />
           <Route path="/" element={<Home />} />
           <Route path="/prom" element={<Prom />} />
           <Route path="/about" element={<AboutUs />} />

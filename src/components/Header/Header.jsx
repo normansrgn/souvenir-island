@@ -53,6 +53,10 @@ export default function Header() {
             <Link to={"/about"}>
               <li>О нас</li>
             </Link>
+
+            <Link to={"/materials"}>
+              <li>Материалы</li>
+            </Link>
           </ol>
         </div>
 

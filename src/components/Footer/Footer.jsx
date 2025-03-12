@@ -25,22 +25,27 @@ export default function Footer() {
 
                         </Link>
                     </div>
-                    <div className="footer__text">
-                        <div className="footer__textConts">
-                            <div className="footer__textContsTitle">Адрес:</div>
-                            <ol>
-                                <li></li>
-                                <li></li>
-                            </ol>
+                    <div className="footer__cccc">
+                        <div className="footer__map">
+                       
                         </div>
-                        <div className="footer__textConts">
-                            <div className="footer__textContsTitle">Контакты:</div>
-                            <ol>
-                                <li>+7(918)345-55-66</li>
-                                <li>socuinerekgndjg@gmail.com</li>
-                            </ol>
-                        </div>
+                        <div className="footer__text">
+                            <div className="footer__textConts">
+                                <div className="footer__textContsTitle">Адрес:</div>
+                                <ol>
+                                    <li></li>
+                                    <li></li>
+                                </ol>
+                            </div>
+                            <div className="footer__textConts">
+                                <div className="footer__textContsTitle">Контакты:</div>
+                                <ol>
+                                    <li>+7(918)345-55-66</li>
+                                    <li>socuinerekgndjg@gmail.com</li>
+                                </ol>
+                            </div>
 
+                        </div>
                     </div>
 
                 </Container>
