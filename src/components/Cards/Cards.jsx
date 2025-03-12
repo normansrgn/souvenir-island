@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Card from "./Card";
-import productsData from "./data"; 
+import productsData from "./data";
 import Search from "../search/Search";
 import { Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
@@ -25,11 +25,12 @@ export default function App() {
           {filteredProducts.map((product) => (
             <Card
               key={product.id}
+              id={product.id} // Добавил id
               name={product.name}
               price={product.price}
               image={product.image}
               category={product.category}
-              
+              description={product.description}
             />
           ))}
         </Row>

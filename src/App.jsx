@@ -11,9 +11,9 @@ import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
 import Basket from "./pages/Basket";
 import Reg from "./pages/auth/Reg";
-import UserPage from "./pages/UserProfile";
 import Login from "./pages/auth/Log";
 import Checkout from "./components/Checkout/Checkout";
+import ProductDetail from "./pages/ProductDetail/ProductDetail"; // Импортируем компонент ProductDetail
 
 function App() {
   const location = useLocation();
@@ -28,7 +28,7 @@ function App() {
         <Route path="/cart" element={<Basket />} />
         <Route path="/reg" element={<Reg />} />
         <Route path="/log" element={<Login />} />
-        <Route path="/user/:userId" element={<UserPage />} />
+        <Route path="/product/:id" element={<ProductDetail />} /> {/* Добавляем маршрут для страницы товара */}
         <Route path="checkout" element={<Checkout />} />
       </Routes>
     </>
