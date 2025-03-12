@@ -23,10 +23,17 @@ export default function ProductDetail() {
 
     // Обработчик для добавления товара в корзину
     const handleBuy = () => {
-        const { name, price, image, category } = product;
-        const productToAdd = { name, price, image, category };
+        const { id, name, price, image, category } = product;
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        cart.push(productToAdd);
+
+        const existingProductIndex = cart.findIndex(item => item.id === id);
+
+        if (existingProductIndex !== -1) {
+            cart[existingProductIndex].quantity += 1;
+        } else {
+            cart.push({ id, name, price, image, category, quantity: 1 });
+        }
+
         localStorage.setItem("cart", JSON.stringify(cart));
         alert(`${name} добавлен в корзину`);
     };
