@@ -55,7 +55,7 @@ export default function Header() {
             <Link to={"/"}>
               <li>Главная</li>
             </Link>
-            <Link to="#" onClick={scrollToCatalog}>
+            <Link to="catalog" onClick={scrollToCatalog}>
               <li>Каталог</li>
             </Link>
             <Link to={"/about"}>

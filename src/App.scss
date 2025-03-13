@@ -9,7 +9,7 @@
 }
 
 html {
-   scroll-behavior: smooth;
+  // scroll-behavior: smooth;
   scroll-behavior: auto;
   /* overflow-y: hidden; */
 }
@@ -33,20 +33,22 @@ html {
 body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Обеспечивает, что body займет всю высоту экрана */
-  background-color: #e8e7e3 !important;
-  font-family: "Inter", sans-serif !important;
-  color: #7a876c !important;
+  min-height: 100vh; // Минимальная высота на всю высоту экрана
   overflow-x: hidden;
+  font-family: "Inter", sans-serif !important;
+  color: #79876b !important;
 }
 
 main {
-  flex-grow: 1; /* Главное содержимое будет занимать все доступное пространство */
+  flex-grow: 1; // Занимает все доступное пространство между header и footer
+  padding: 20px 0; // Добавляет отступ сверху и снизу
 }
 
 footer {
-  margin-top: auto; /* Футер будет прижат к низу */
+  margin-top: auto; // Прижимает footer к низу, если контента мало
+  padding: 20px 0;
 }
+
 a {
   text-decoration: none !important;
   color: rgb(255, 255, 255) !important;
