@@ -9,7 +9,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import "./home.scss"; 
+import "./home.scss";
+import WhyUs from "../components/whyus/whyus";
 
 // Кастомные стрелки
 const NextArrow = (props) => {
@@ -61,7 +62,11 @@ export default function Home() {
       <Prom />
 
       <div className="home">
+        <div className="home__us">
+          <WhyUs />
+        </div>
         <Container className="home__container">
+
           <div className="home__recomends">
             <div className="home__title">Магазин рекомендует:</div>
 
