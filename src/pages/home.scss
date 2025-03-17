@@ -1,9 +1,36 @@
 .home {
-    margin-bottom: 90px;
+  margin-bottom: 90px;
   &__title {
     font-size: 35px;
     font-weight: bold;
     text-align: center;
+  }
+
+  &__btn {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__sliderPromoBtn {
+
+    cursor: pointer;
+    padding: 15px;
+    color: white;
+    background-color: #7a876c;
+    border: none;
+    border-radius: 15px;
+    font-size: 18px;
+    border: 3px solid #7a876c;
+
+    transition: 0.1s ease-in;
+
+    &:hover {
+      background: none;
+      color: #7a876c;
+      border: 3px solid #7a876c;
+    }
   }
 }
 
@@ -63,4 +90,32 @@
 
 .prev {
   left: -40px;
+}
+
+@media (max-width: 768px) {
+  .custom-slide {
+    padding: 10px; // Уменьшаем отступы
+  }
+
+  .custom-slider {
+    padding: 20px 0; // Уменьшаем общий отступ
+  }
+
+  .custom-arrow {
+    display: none; // Скрываем кастомные стрелки
+  }
+
+  .home__title {
+    font-size: 28px; // Уменьшаем заголовок
+  }
+}
+
+@media (max-width: 751px) {
+  .prom {
+    height: auto;
+  }
+
+  .slider {
+    height: auto;
+  }
 }

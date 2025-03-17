@@ -5,6 +5,7 @@ import Prom from "../components/Prom/Prom";
 import productsData from "../components/Cards/data";
 import Card from "../components/Cards/Card";
 import { Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -52,6 +53,8 @@ export default function Home() {
         breakpoint: 768,
         settings: {
           slidesToShow: 1,
+          arrows: false, // Убираем стрелки на мобильных
+          dots: true, // Оставляем точки для навигации
         },
       },
     ],
@@ -83,8 +86,18 @@ export default function Home() {
                   />
                 </div>
               ))}
+
             </Slider>
+
+
+
           </div>
+          <div className="home__btn">
+            <Link to="/catalog">
+              <button className="home__sliderPromoBtn">Ознакомиться с полным каталогом</button>
+            </Link>
+          </div>
+
         </Container>
       </div>
     </>

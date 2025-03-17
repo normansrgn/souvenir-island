@@ -99,16 +99,20 @@ export default function Checkout() {
                                             {/* Разделяем разметку товара на картинку и текстовые данные */}
                                             <div className="checkout__itemImageContainer">
                                                 <img src={item.image} alt={item.name} className="checkout__itemImage" />
-                                                <div className="checkout__titleblock">
-                                                    <div className="checkout__itemName">{item.name}</div>
+                                                <div className="checkout__text">
+                                                    <div className="checkout__titleblock">
+                                                        <div className="checkout__itemName">{item.name}</div>
 
-                                                    <div className="checkout__itemQuantity">Количество: {item.quantity || 1}</div>
+                                                        <div className="checkout__itemQuantity">Количество: {item.quantity || 1}</div>
+                                                    </div>
+                                                    <div className="checkout__itemDetails">
+
+                                                    </div>
+                                                    <div className="checkout__itemPrice">{item.price * (item.quantity || 1)} ₽</div>
                                                 </div>
-                                            </div>
-                                            <div className="checkout__itemDetails">
 
                                             </div>
-                                            <div className="checkout__itemPrice">{item.price * (item.quantity || 1)} ₽</div>
+
 
                                         </li>
                                     ))}

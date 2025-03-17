@@ -37,10 +37,13 @@ const BurgerMenu = ({ user, onLogout }) => {
               <Link to="/" onClick={handleLinkClick}>
                 <li>Главная</li>
               </Link>
-              <Link to="/aboutus" onClick={handleLinkClick}>
+              <Link to="/about" onClick={handleLinkClick}>
                 <li>О нас</li>
               </Link>
-              <Link to="/cards" onClick={handleLinkClick}>
+              <Link to="/materials" onClick={handleLinkClick}>
+                <li>Материалы</li>
+              </Link>
+              <Link to="/catalog" onClick={handleLinkClick}>
                 <li>Каталог</li>
               </Link>
               <Link to="/cart" onClick={handleLinkClick}>

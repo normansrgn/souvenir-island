@@ -109,3 +109,27 @@
     font-size: 40px;
   }
 }
+
+@media (max-width: 776px) {
+
+  .basket {
+     &__card {
+      width: 100%;
+     }
+
+     
+
+     &__btn {
+      width: 100%;
+     }
+  }
+}
+
+@media (max-width: 467px) {
+
+  .basket {
+     &__cardTitle {
+      font-size: 20px;
+     }
+  }
+}

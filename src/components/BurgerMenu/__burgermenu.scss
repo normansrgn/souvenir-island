@@ -1,7 +1,7 @@
 .burger_menu {
   display: none;
   position: relative;
-  z-index: 5000; 
+  z-index: 5000;
 
   &__bavIcon {
     justify-content: end;
@@ -16,12 +16,12 @@
   right: -85%;
   visibility: hidden;
   transition: right 0.3s ease, visibility 0.3s ease;
-  z-index: 5001; 
-  background: #111111;
+  z-index: 5001;
+  background: #393939;
 }
 
 .burger__container.open {
-  right: 0; 
+  right: 0;
   visibility: visible;
 }
 
@@ -111,21 +111,21 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw; 
+  width: 100vw;
   height: 400vh;
-  background-color: rgba(0, 0, 0, 0.5); 
-  backdrop-filter: blur(10px); 
-  z-index: 4000; 
-  opacity: 0; 
-  visibility: hidden; 
-  pointer-events: none; 
-  transition: opacity 0.3s ease, visibility 0.3s ease; 
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  z-index: 4000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .blur-background.show {
-  opacity: 1; 
-  visibility: visible; 
-  pointer-events: auto; 
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .blur-background.visible {

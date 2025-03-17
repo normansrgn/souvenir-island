@@ -18,7 +18,7 @@ export default function Card({ id, name, price, image, category }) {
     };
 
     return (
-        <section className="card col-xxl-4 col-sm-6 col-md-9">
+        <section className="card col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
             <div className="card__category">{category}</div>
             <Link to={`/product/${id}`}>
                 <img src={image} alt={name} className="card__img" />
