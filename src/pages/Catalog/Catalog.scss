@@ -1,13 +1,11 @@
 .catalog {
-    margin-top: 80px;
+  margin-top: 80px;
+  min-height: 110vh;
 
-
-
-
-    &__title {
-        margin-bottom: 25px;
-        font-size: 40px;
-        font-weight: bold;
-        text-align: center;
-    }
+  &__title {
+    margin-bottom: 25px;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+  }
 }
