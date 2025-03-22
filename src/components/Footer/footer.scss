@@ -1,5 +1,4 @@
 .footer {
-
   padding: 120px 0px 60px 0px;
   //   padding: 25px;
   background-color: #79876b;
@@ -22,7 +21,6 @@
   }
 
   &__contactsUsText {
-
     & p {
       font-size: 19px;
     }
@@ -38,6 +36,12 @@
     flex-direction: column;
     gap: 15px;
 
+    & ol {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
     & li {
       width: 200px;
     }
@@ -49,13 +53,9 @@
   }
 }
 
-
 @media (max-width: 800px) {
-
   .footer {
-
     &__container {
-
       flex-direction: column;
       gap: 40px;
     }

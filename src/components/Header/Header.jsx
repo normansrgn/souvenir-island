@@ -10,9 +10,8 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 export default function Header() {
   const [user, setUser] = useState(null);
 
-  // Ссылка на секцию с карточками товаров
   const scrollToCatalog = () => {
-    const element = document.getElementById('catalog-section'); // Убедитесь, что вы используете тот же ID
+    const element = document.getElementById('catalog-section'); 
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }

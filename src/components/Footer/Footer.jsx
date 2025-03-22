@@ -44,7 +44,7 @@ export default function Footer() {
                                 <div className="footer__textContsTitle">Контакты:</div>
                                 <ol>
                                     <li>+7(918)345-55-66</li>
-                                    <li>socuinerekgndjg@gmail.com</li>
+                                    <li>diplomktuis2025@gmail.com</li>
                                 </ol>
                             </div>
 
