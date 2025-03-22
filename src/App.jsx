@@ -18,12 +18,14 @@ import Footer from "./components/Footer/Footer";
 import Meterials from "./pages/Meterials/Meterials";
 import Catalog from "./pages/Catalog/Catalog";
 import UserProfile from "./pages/UserProfile";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 function App() {
   const location = useLocation();
 
   return (
     <>
+      <ScrollToTop />
       <Header />
       <main>
         <Routes location={location} key={location.pathname}>
