@@ -20,7 +20,7 @@ export default function Login() {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("Пользователь вошел в систему:", userCredential.user);
 
-      navigate(`/user/${userCredential.user.uid}`);
+      navigate("/");
 
       setEmail("");
       setPassword("");

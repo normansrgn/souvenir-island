@@ -15,7 +15,8 @@
 
     & p {
         width: 1164px;
-        font-size: 20px;
+        font-size: 24px;
+        font-weight: bold;
     }
   }
 
@@ -51,13 +52,15 @@
   }
 
   &__contactsUsText {
+    
     margin-top: 8px;
+    margin-bottom: 40px;
     display: flex;
     flex-direction: column;
     gap: 3px;
 
     & p {
-      font-size: 14px;
+      font-size: 19px;
       font-weight: 590;
     }
   }

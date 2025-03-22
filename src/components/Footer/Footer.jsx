@@ -27,14 +27,17 @@ export default function Footer() {
                     </div>
                     <div className="footer__cccc">
                         <div className="footer__map">
-                       
+
                         </div>
                         <div className="footer__text">
                             <div className="footer__textConts">
                                 <div className="footer__textContsTitle">Адрес:</div>
                                 <ol>
-                                    <li></li>
-                                    <li></li>
+                                    <li>
+                                        Сувенирная лавка 
+                                        Пролетарская ул., 209,  станица Брюховецкая
+
+                                    </li>
                                 </ol>
                             </div>
                             <div className="footer__textConts">

@@ -17,6 +17,7 @@ import ProductDetail from "./pages/ProductDetail/ProductDetail"; // Импорт
 import Footer from "./components/Footer/Footer";
 import Meterials from "./pages/Meterials/Meterials";
 import Catalog from "./pages/Catalog/Catalog";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
   const location = useLocation();
@@ -34,6 +35,7 @@ function App() {
           <Route path="/reg" element={<Reg />} />
           <Route path="/log" element={<Login />} />
           <Route path="/product/:id" element={<ProductDetail />} /> {/* Добавляем маршрут для страницы товара */}
+          <Route path="/user/:id" element={<UserProfile />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="catalog" element={<Catalog />} />
         </Routes>
