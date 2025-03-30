@@ -1,5 +1,6 @@
 .productDetail {
   margin-top: 80px;
+  margin-bottom: 80px;
 
   &__container {
     display: flex;
@@ -12,7 +13,7 @@
 
   &__img {
     & img {
-        box-shadow: inset 10px 0 15px -6px rgba(0, 0, 0, 0.25);
+      box-shadow: inset 10px 0 15px -6px rgba(0, 0, 0, 0.25);
       border-radius: 19px;
     }
   }
@@ -69,5 +70,39 @@
     max-width: 100%;
     line-height: 2.2rem;
     font-weight: 400;
+  }
+}
+
+@media (max-width: 1108px) {
+  .productDetail {
+    &__container {
+      flex-direction: column;
+    }
+
+    &__img {
+      & img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .productDetail {
+    margin-top: 10px;
+
+    &__Title {
+      font-size: 29px;
+    }
+
+    &__text {
+      & button {
+        width: 100%;
+      }
+    }
+
+    &__disc {
+      font-size: 19px;
+    }
   }
 }

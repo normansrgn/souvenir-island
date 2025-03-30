@@ -2,6 +2,13 @@
     min-height: 110vh;
     margin-top: 50px;
 
+    &__underButton {
+
+        & span {
+            color: #404738;
+        }
+    }
+
     &__container {
         display: flex;
     flex-direction: column;

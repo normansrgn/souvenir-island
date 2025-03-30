@@ -22,6 +22,7 @@ import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 function App() {
   const location = useLocation();
+  const isAuthenticated = true; // Пример для отображения баннера
 
   return (
     <>
@@ -42,6 +43,7 @@ function App() {
           <Route path="catalog" element={<Catalog />} />
         </Routes>
       </main>
+    
       <Footer />
     </>
   );

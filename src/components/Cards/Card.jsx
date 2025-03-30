@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebaseConfig";
 import "./Cards.scss";
 
 export default function Card({ id, name, price, image, category }) {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setIsAuthenticated(!!user);
+        });
+        return () => unsubscribe();
+    }, []);
+
+    const discountedPrice = isAuthenticated ? (price * 0.95).toFixed(2) : price;
+
     const handleBuy = () => {
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
         const existingProductIndex = cart.findIndex(item => item.id === id);
@@ -26,10 +39,26 @@ export default function Card({ id, name, price, image, category }) {
             <div className="card__textBlock">
                 <h1>{name}</h1>
                 <div className="card__textP">
-                    <div className="card__price">{price} ₽</div>
+                    <div className="card__price">
+                        {isAuthenticated ? (
+                            <>
+                                <span className="discounted-price">{discountedPrice} ₽</span>
+                                <span className="original-price" style={{ textDecoration: "line-through", color: "gray" }}>
+                                    {price} ₽
+                                </span>
+                            </>
+                        ) : (
+                            <>{price} ₽</>
+                        )}
+                    </div>
                     <div className="card__buyBtn" onClick={handleBuy}>Купить</div>
                 </div>
             </div>
+            { !isAuthenticated && (
+                <div className="discount-notification">
+                    Авторизуйтесь, чтобы получить скидку 5% на все товары!
+                </div>
+            )}
         </section>
     );
 }

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import productsData from "../../components/Cards/data";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebaseConfig";
 
 import { Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -16,10 +18,21 @@ export default function ProductDetail() {
 
     const product = productsData.find((prod) => prod.id === productId); // Находим товар по id
 
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setIsAuthenticated(!!user);
+        });
+        return () => unsubscribe();
+    }, []);
+
     if (!product) {
         console.log('Товар не найден');
         return <div>Товар не найден.</div>;
     }
+
+    const discountedPrice = isAuthenticated ? (product.price * 0.95).toFixed(2) : product.price;
 
     // Обработчик для добавления товара в корзину
     const handleBuy = () => {
@@ -46,7 +59,18 @@ export default function ProductDetail() {
                 </div>
                 <div className="productDetail__text">
                     <h1 className="productDetail__Title">{product.name}</h1>
-                    <div className="productDetail__price">{product.price} ₽</div>
+                    <div className="productDetail__price">
+                        {isAuthenticated ? (
+                            <>
+                                <span className="discounted-price">{discountedPrice} ₽</span>
+                                <span className="original-price" style={{ textDecoration: "line-through", color: "gray" }}>
+                                    {product.price} ₽
+                                </span>
+                            </>
+                        ) : (
+                            <>{product.price} ₽</>
+                        )}
+                    </div>
                     <button onClick={handleBuy}>Добавить в корзину</button>
 
                     <div className="productDetail__desc">
@@ -55,6 +79,11 @@ export default function ProductDetail() {
                     </div>
                 </div>
             </Container>
+            { !isAuthenticated && (
+                <div className="discount-notification">
+                    Авторизуйтесь, чтобы получить скидку 5% на все товары!
+                </div>
+            )}
         </div>
     );
 }

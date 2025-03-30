@@ -79,7 +79,7 @@ export default function Checkout() {
                                         </Form.Group>
 
                                         <Form.Group>
-                                            <Form.Control type="tel" name="phone" placeholder="Номер телефона" value={formData.phone} onChange={handleInputChange} required />
+                                            <Form.Control type="number" name="phone" placeholder="Номер телефона" value={formData.phone} onChange={handleInputChange} required />
                                         </Form.Group>
                                     </div>
                                     <div className="checkout__delivery">
