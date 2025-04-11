@@ -1,14 +1,21 @@
 .materials {
-    margin-top: 60px;
-    min-height: 110vh;
+  margin-top: 60px;
+  min-height: 110vh;
 
+  &__cont {
+    font-size: 19px;
+  }
 
-    &__cont {
-        font-size: 19px;
+  &__text {
+    font-size: 23px;
+    font-weight: bold;
+  }
+
+  &__im {
+    display: flex;
+    gap: 20px;
+    & img {
+      width: 600px;
     }
-
-    &__text {
-        font-size: 23px;
-        font-weight: bold;
-    }
+  }
 }

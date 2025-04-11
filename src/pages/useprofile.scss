@@ -1,32 +1,79 @@
 .userProfile {
     min-height: 90vh;
-
-
+    background: #f1f3f0;
+    padding: 40px 0;
+    display: flex;
+    align-items: center;
+  
+    .basket__title {
+      color: #495c3d;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+  
+    &__card {
+      background-color: #7a876c;
+      color: white;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 500px;
+      margin: 0 auto;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      transition: transform 0.3s ease;
+  
+      &:hover {
+        transform: translateY(-4px);
+      }
+    }
+  
+    &__avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: white;
+      color: #7a876c;
+      font-size: 2rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
     &__info {
-
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding: 15px;
-        width: 400px;
-        color: white;
-        border-radius: 19px;
-        background-color: #7a876c;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
     }
-
-    &__infoName {
-        display: flex;
-        align-items: center;
-        gap: 2px;
+  
+    &__infoItem {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 1rem;
     }
-    
-
+  
     &__logout {
-        background-color: white;
-        color: #7a876c;
-        border: none;
-        border-radius: 19px;
-        padding: 10px 20px;
-        cursor: pointer;
+      margin-top: 10px;
+      background-color: white;
+      color: #7a876c;
+      border: none;
+      border-radius: 20px;
+      padding: 12px 24px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+  
+      &:hover {
+        background-color: #dfe6da;
+      }
     }
-}
+  }

@@ -44,7 +44,7 @@ export default function Basket() {
                   <img src={item.image} alt={item.name} className="basket__img" />
                   <div className="basket__cardText">
                     <div className="basket__cardTitle">{item.name}</div>
-                    <div className="basket__price">{item.price * item.quantity} ₽</div>
+                    <div className="basket__price">{item.price} ₽</div>
                     <div className="basket__quantity">
                       <button onClick={() => changeQuantity(item.id, -1)}>-</button>
                       <span>{item.quantity}</span>

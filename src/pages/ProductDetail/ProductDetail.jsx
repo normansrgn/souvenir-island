@@ -79,11 +79,7 @@ export default function ProductDetail() {
                     </div>
                 </div>
             </Container>
-            { !isAuthenticated && (
-                <div className="discount-notification">
-                    Авторизуйтесь, чтобы получить скидку 5% на все товары!
-                </div>
-            )}
+
         </div>
     );
 }

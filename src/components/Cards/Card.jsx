@@ -54,11 +54,7 @@ export default function Card({ id, name, price, image, category }) {
                     <div className="card__buyBtn" onClick={handleBuy}>Купить</div>
                 </div>
             </div>
-            { !isAuthenticated && (
-                <div className="discount-notification">
-                    Авторизуйтесь, чтобы получить скидку 5% на все товары!
-                </div>
-            )}
+          
         </section>
     );
 }

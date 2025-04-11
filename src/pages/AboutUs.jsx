@@ -60,7 +60,8 @@ export default function AboutUs() {
                 <p>
                   Мы в телеграмме: <a className="url" href="https://t.me/vceuzdereva2022 "> https://t.me/vceuzdereva2022 </a>
                 </p>
-                <p>Пролетарская ул., 209, станица Брюховецкая </p>
+                <p>                                        Краснодарский край, Брюховецкий район, ст. Брюховецкая, ул. Пролетарская, д. 209
+                </p>
               </div>
             </div>
           </section>

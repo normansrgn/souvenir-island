@@ -5,6 +5,7 @@
   color: white !important;
 
   &__container {
+    align-items: start;
     display: flex;
     justify-content: space-between;
   }
@@ -29,6 +30,7 @@
   &__text {
     display: flex;
     gap: 30px;
+    flex-direction: column;
   }
 
   &__textConts {
@@ -43,7 +45,7 @@
     }
 
     & li {
-      width: 200px;
+      width: 400px;
     }
   }
 
