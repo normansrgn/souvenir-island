@@ -30,7 +30,7 @@
   &__text {
     display: flex;
     gap: 30px;
-    flex-direction: column;
+    flex-direction: row;
   }
 
   &__textConts {
@@ -46,11 +46,12 @@
 
     & li {
       width: 400px;
+      font-size: 16px;
     }
   }
 
   &__textContsTitle {
-    font-size: 35px;
+    font-size: 19px;
     font-weight: bold;
   }
 }

@@ -48,7 +48,7 @@ export default function ProductDetail() {
         }
 
         localStorage.setItem("cart", JSON.stringify(cart));
-        alert(`${name} добавлен в корзину`);
+        alert(`Товар ${name} добавлен в корзину`);
     };
 
     return (
