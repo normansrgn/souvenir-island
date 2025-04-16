@@ -14,9 +14,93 @@
     gap: 30px;
 
     & p {
-        width: 1164px;
-        font-size: 24px;
-        font-weight: bold;
+      width: 100%;
+      font-size: 24px;
+      font-weight: bold;
+    }
+  }
+
+  /* Стили для промо-слайдера */
+  &__promo-slider {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  &__promo-slide {
+    position: relative; /* Делаем контейнер слайда позиционированным для наложения текста */
+  }
+
+  &__promo-caption {
+    position: absolute;
+    bottom: 20px; /* Отступ от нижнего края */
+    left: 50%;
+    transform: translateX(-50%); /* Центрируем по горизонтали */
+    background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный фон для читаемости */
+    color: #fff; /* Белый текст */
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  &__promo-title {
+    text-align: center;
+    margin-bottom: 20px;
+
+    & h2 {
+      font-size: 36px;
+      font-weight: 600;
+    }
+  }
+
+  &__promo-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Скрываем части изображения, которые выходят за пределы контейнера при увеличении */
+  }
+
+  &__promo-image {
+    width: 100%;
+    max-width: 100%;
+    height: 700px;
+    object-fit: cover;
+    border-radius: 19px;
+    transition: transform 0.3s ease; /* Плавная анимация масштабирования */
+  }
+
+  /* Эффект зума при наведении */
+  &__promo-image:hover {
+    transform: scale(1.1); /* Увеличиваем изображение на 10% */
+  }
+
+  /* Стили для стрелок и точек слайдера */
+  .slick-prev,
+  .slick-next {
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+  }
+
+  .slick-prev {
+    left: 10px;
+  }
+
+  .slick-next {
+    right: 10px;
+  }
+
+  .slick-dots {
+    bottom: -30px;
+
+    & li button:before {
+      font-size: 12px;
+      color: #7a876c;
+    }
+
+    & li.slick-active button:before {
+      color: #7a876c;
     }
   }
 
@@ -26,7 +110,6 @@
     flex-direction: column;
     gap: 30px;
     justify-content: center;
-    // align-items: center;
   }
 
   &__contactsTitle {
@@ -34,8 +117,6 @@
     font-weight: 600;
     text-align: center;
     margin-top: 40px;
-
-
   }
 
   &__contactsMap {
@@ -52,7 +133,6 @@
   }
 
   &__contactsUsText {
-    
     margin-top: 8px;
     margin-bottom: 40px;
     display: flex;
@@ -67,6 +147,6 @@
 }
 
 .url {
-text-decoration: none;
-color: #7a876c !important;
+  text-decoration: none;
+  color: #7a876c !important;
 }

@@ -6,15 +6,15 @@ import { getAnalytics } from "firebase/analytics";
 
 // Конфигурация вашего приложения Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyAuiLOtzOrteTw9fQJx_Suf9ON7n-w5RLE",
-  authDomain: "souvenirisland-29eda.firebaseapp.com",
-  projectId: "souvenirisland-29eda",
-  storageBucket: "souvenirisland-29eda.appspot.com",
-  messagingSenderId: "1009894972082",
-  appId: "1:1009894972082:web:3645d4424a4fe2ce6907ab",
-  measurementId: "G-2QYYMKWX5Q",
-  databaseURL: "https://souvenirisland-29eda-default-rtdb.firebaseio.com/" // URL вашей базы данных
+  apiKey: "AIzaSyDeCdMVDxiWA6QrGOcSAMKLEfFb_x0y374",
+  authDomain: "souvenirisland-2e03c.firebaseapp.com",
+  projectId: "souvenirisland-2e03c",
+  storageBucket: "souvenirisland-2e03c.firebasestorage.app",
+  messagingSenderId: "342206585918",
+  appId: "1:342206585918:web:0622505fab70d2f218c56f",
+  measurementId: "G-VXNTRLXDQ1"
 };
+
 
 // Инициализация Firebase
 const app = initializeApp(firebaseConfig);
