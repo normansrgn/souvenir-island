@@ -7,10 +7,10 @@ import "./checkout.scss";
 
 export default function Checkout() {
     const [cartItems, setCartItems] = useState([]);
-    const [formData, setFormData] = useState({ 
-        name: "", 
-        phone: "", 
-        address: "", 
+    const [formData, setFormData] = useState({
+        name: "",
+        phone: "",
+        address: "",
         deliveryMethod: "delivery",
         email: ""
     });
@@ -28,7 +28,7 @@ export default function Checkout() {
     const formatPhoneNumber = (value) => {
         const cleanedValue = value.replace(/\D/g, '');
         if (cleanedValue.length > 11) return value.substring(0, 19);
-        
+
         let formattedValue = cleanedValue;
         if (cleanedValue.length > 1) {
             formattedValue = `+7 (${cleanedValue.substring(1, 4)}) ${cleanedValue.substring(4, 7)}-${cleanedValue.substring(7, 9)}-${cleanedValue.substring(9)}`;
@@ -42,7 +42,7 @@ export default function Checkout() {
         if (name === "phone") {
             const formattedValue = formatPhoneNumber(value);
             setFormData({ ...formData, [name]: formattedValue });
-            
+
             const phoneDigits = formattedValue.replace(/\D/g, '');
             setPhoneError(phoneDigits.length < 11 ? "Номер должен содержать 11 цифр" : "");
         } else {
@@ -73,7 +73,7 @@ export default function Checkout() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSubmitError("");
-        
+
         if (!validateForm()) return;
 
         setIsSubmitting(true);
@@ -104,10 +104,10 @@ export default function Checkout() {
             localStorage.removeItem("cart");
             setCartItems([]);
             setFormData({ name: "", phone: "", address: "", deliveryMethod: "delivery", email: "" });
-            
+
             // Показать модальное окно успеха
             setShowModal(true);
-            
+
             // Перенаправление через 3 секунды
             setTimeout(() => {
                 setShowModal(false);
@@ -130,7 +130,7 @@ export default function Checkout() {
                     <FaShoppingBag className="me-2" />
                     Оформление заказа
                 </h1>
-                
+
                 {cartItems.length > 0 ? (
                     <div className="checkout-content">
                         <div className="checkout-form-container">
@@ -138,20 +138,20 @@ export default function Checkout() {
                                 <FaUser className="me-2" />
                                 Личные данные
                             </h2>
-                            
+
                             {submitError && <Alert variant="danger">{submitError}</Alert>}
-                            
+
                             <Form onSubmit={handleSubmit} className="checkout-form">
                                 <Form.Group className="mb-4">
                                     <Form.Label>Имя и Фамилия*</Form.Label>
                                     <div className="input-with-icon">
-                                        <Form.Control 
-                                            type="text" 
-                                            name="name" 
-                                            placeholder="Иван Иванов" 
-                                            value={formData.name} 
-                                            onChange={handleInputChange} 
-                                            required 
+                                        <Form.Control
+                                            type="text"
+                                            name="name"
+                                            placeholder="Иван Иванов"
+                                            value={formData.name}
+                                            onChange={handleInputChange}
+                                            required
                                         />
                                         <FaUser className="input-icon" />
                                     </div>
@@ -160,13 +160,13 @@ export default function Checkout() {
                                 <Form.Group className="mb-4">
                                     <Form.Label>Телефон*</Form.Label>
                                     <div className="input-with-icon">
-                                        <Form.Control 
-                                            type="tel" 
-                                            name="phone" 
-                                            placeholder="+7 (___) ___-__-__" 
-                                            value={formData.phone} 
-                                            onChange={handleInputChange} 
-                                            required 
+                                        <Form.Control
+                                            type="tel"
+                                            name="phone"
+                                            placeholder="+7 (___) ___-__-__"
+                                            value={formData.phone}
+                                            onChange={handleInputChange}
+                                            required
                                         />
                                         <FaPhone className="input-icon" />
                                     </div>
@@ -175,12 +175,12 @@ export default function Checkout() {
 
                                 <Form.Group className="mb-4">
                                     <Form.Label>Email (необязательно)</Form.Label>
-                                    <Form.Control 
-                                        type="email" 
-                                        name="email" 
-                                        placeholder="example@mail.com" 
-                                        value={formData.email} 
-                                        onChange={handleInputChange} 
+                                    <Form.Control
+                                        type="email"
+                                        name="email"
+                                        placeholder="example@mail.com"
+                                        value={formData.email}
+                                        onChange={handleInputChange}
                                     />
                                 </Form.Group>
 
@@ -188,7 +188,7 @@ export default function Checkout() {
                                     <FaMapMarkerAlt className="me-2" />
                                     Способ получения
                                 </h2>
-                                
+
                                 <div className="delivery-options">
                                     <Form.Check
                                         type="radio"
@@ -200,7 +200,7 @@ export default function Checkout() {
                                         onChange={handleInputChange}
                                         className="delivery-option"
                                     />
-                                    
+
                                     <Form.Check
                                         type="radio"
                                         id="selfPickup"
@@ -212,31 +212,32 @@ export default function Checkout() {
                                         className="delivery-option"
                                     />
                                 </div>
-                                
+
                                 {formData.deliveryMethod === "selfPickup" ? (
                                     <div className="pickup-info">
-                                        <p><strong>Адрес самовывоза:</strong> ул. Пролетарская, д. 209 г. Краснодар</p>
-                                        <p><strong>Часы работы:</strong> Пн-Пт: 10:00-20:00, Сб-Вс: 11:00-18:00</p>
+                                        <p><strong>Адрес самовывоза:</strong> ул. Пролетарская 209, ст. Брюховецкая Краснодар</p>
+                                        <p><strong>Часы работы:</strong> Пн-пт: 9:00-18:00
+                                            Сб-вс: 9:00-16:00</p>
                                     </div>
                                 ) : (
                                     <Form.Group className="mb-4 mt-3">
                                         <Form.Label>Адрес доставки*</Form.Label>
-                                        <Form.Control 
-                                            type="text" 
-                                            name="address" 
-                                            placeholder="Город, улица, дом, квартира" 
-                                            value={formData.address} 
-                                            onChange={handleInputChange} 
+                                        <Form.Control
+                                            type="text"
+                                            name="address"
+                                            placeholder="Город, улица, дом, квартира"
+                                            value={formData.address}
+                                            onChange={handleInputChange}
                                             required={formData.deliveryMethod === "delivery"}
                                         />
                                     </Form.Group>
                                 )}
                             </Form>
                         </div>
-                        
+
                         <div className="order-summary">
                             <h2 className="section-title">Ваш заказ</h2>
-                            
+
                             <div className="order-items">
                                 {cartItems.map((item, index) => (
                                     <div key={index} className="order-item">
@@ -251,28 +252,28 @@ export default function Checkout() {
                                     </div>
                                 ))}
                             </div>
-                            
+
                             <div className="order-total">
                                 <div className="total-row">
                                     <span>Итого:</span>
                                     <span className="total-price">{totalPrice} ₽</span>
                                 </div>
-                                
+
                                 {formData.deliveryMethod === "delivery" && (
                                     <div className="total-row">
                                         <span>Доставка:</span>
                                         <span className="delivery-price">Бесплатно</span>
                                     </div>
                                 )}
-                                
+
                                 <div className="total-row grand-total">
                                     <span>К оплате:</span>
                                     <span>{totalPrice} ₽</span>
                                 </div>
                             </div>
-                            
-                            <Button 
-                                onClick={handleSubmit} 
+
+                            <Button
+                                onClick={handleSubmit}
                                 className="submit-button"
                                 disabled={phoneError || isSubmitting}
                             >
@@ -285,7 +286,7 @@ export default function Checkout() {
                                     "Подтвердить заказ"
                                 )}
                             </Button>
-                            
+
                             <p className="security-note">
                                 Ваши данные защищены и не будут переданы третьим лицам
                             </p>
