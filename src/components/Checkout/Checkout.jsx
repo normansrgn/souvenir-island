@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
 import emailjs from "emailjs-com";
-import { Container, Form, Button, Modal } from "react-bootstrap";
-import { Link } from "react-router-dom"
-import { useNavigate } from "react-router-dom";
+import { Container, Form, Button, Modal, Alert, Spinner } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { FaShoppingBag, FaMapMarkerAlt, FaPhone, FaUser, FaCheckCircle } from "react-icons/fa";
 import "./checkout.scss";
-import "../../pages/basket.scss"
 
 export default function Checkout() {
     const [cartItems, setCartItems] = useState([]);
-    const [formData, setFormData] = useState({ name: "", phone: "", address: "" });
+    const [formData, setFormData] = useState({ 
+        name: "", 
+        phone: "", 
+        address: "", 
+        deliveryMethod: "delivery",
+        email: ""
+    });
     const [phoneError, setPhoneError] = useState("");
     const [showModal, setShowModal] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,181 +25,296 @@ export default function Checkout() {
         setCartItems(storedCart);
     }, []);
 
+    const formatPhoneNumber = (value) => {
+        const cleanedValue = value.replace(/\D/g, '');
+        if (cleanedValue.length > 11) return value.substring(0, 19);
+        
+        let formattedValue = cleanedValue;
+        if (cleanedValue.length > 1) {
+            formattedValue = `+7 (${cleanedValue.substring(1, 4)}) ${cleanedValue.substring(4, 7)}-${cleanedValue.substring(7, 9)}-${cleanedValue.substring(9)}`;
+        }
+        return formattedValue;
+    };
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        
+
         if (name === "phone") {
-            // Удаляем все нецифровые символы
-            const cleanedValue = value.replace(/\D/g, '');
-            
-            // Проверяем длину номера (для России обычно 11 цифр)
-            if (cleanedValue.length > 11) {
-                return;
-            }
-            
-            // Форматируем номер телефона
-            let formattedValue = cleanedValue;
-            if (cleanedValue.length > 1) {
-                formattedValue = `+7 (${cleanedValue.substring(1, 4)}) ${cleanedValue.substring(4, 7)}-${cleanedValue.substring(7, 9)}-${cleanedValue.substring(9)}`;
-            }
-            
+            const formattedValue = formatPhoneNumber(value);
             setFormData({ ...formData, [name]: formattedValue });
             
-            // Валидация номера
-            if (cleanedValue.length < 11) {
-                setPhoneError("Номер должен содержать 11 цифр");
-            } else {
-                setPhoneError("");
-            }
+            const phoneDigits = formattedValue.replace(/\D/g, '');
+            setPhoneError(phoneDigits.length < 11 ? "Номер должен содержать 11 цифр" : "");
         } else {
             setFormData({ ...formData, [name]: value });
         }
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        // Проверяем валидность номера
+    const validateForm = () => {
         const phoneDigits = formData.phone.replace(/\D/g, '');
         if (phoneDigits.length !== 11) {
             setPhoneError("Введите корректный номер телефона (11 цифр)");
-            return;
+            return false;
         }
 
-        if (!formData.name || !formData.address) {
-            alert("Заполните все поля!");
-            return;
+        if (!formData.name.trim()) {
+            setSubmitError("Пожалуйста, укажите ваше имя");
+            return false;
         }
 
-        const orderDetails = cartItems
-            .map((item) => `${item.name} (x${item.quantity}): ${item.price * item.quantity} ₽`)
-            .join("\n");
+        if (formData.deliveryMethod === "delivery" && !formData.address.trim()) {
+            setSubmitError("Пожалуйста, укажите адрес доставки");
+            return false;
+        }
 
-        const templateParams = {
-            user_name: formData.name,
-            user_phone: formData.phone,
-            user_address: formData.address,
-            order_details: orderDetails,
-            total_price: cartItems.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0) + " ₽",
-        };
+        return true;
+    };
 
-        emailjs
-            .send(
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setSubmitError("");
+        
+        if (!validateForm()) return;
+
+        setIsSubmitting(true);
+
+        try {
+            const orderDetails = cartItems
+                .map((item) => `${item.name} (x${item.quantity}): ${item.price * item.quantity} ₽`)
+                .join("\n");
+
+            const templateParams = {
+                user_name: formData.name,
+                user_phone: formData.phone,
+                user_email: formData.email,
+                user_address: formData.deliveryMethod === "delivery" ? formData.address : "Самовывоз",
+                delivery_method: formData.deliveryMethod === "delivery" ? "Доставка" : "Самовывоз",
+                order_details: orderDetails,
+                total_price: cartItems.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0) + " ₽",
+            };
+
+            await emailjs.send(
                 import.meta.env.VITE_EMAILJS_SERVICE_ID,
                 import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
                 templateParams,
                 import.meta.env.VITE_EMAILJS_USER_ID
-            )
-            .then(() => {
-                setShowModal(true);
-                localStorage.removeItem("cart");
-                setCartItems([]);
-                setFormData({ name: "", phone: "", address: "" });
-                setTimeout(() => {
-                    setShowModal(false);
-                    navigate("/");
-                }, 3000);
-            })
-            .catch((error) => {
-                console.error("Ошибка отправки заказа:", error);
-            });
+            );
+
+            // Очистка корзины и формы
+            localStorage.removeItem("cart");
+            setCartItems([]);
+            setFormData({ name: "", phone: "", address: "", deliveryMethod: "delivery", email: "" });
+            
+            // Показать модальное окно успеха
+            setShowModal(true);
+            
+            // Перенаправление через 3 секунды
+            setTimeout(() => {
+                setShowModal(false);
+                navigate("/");
+            }, 3000);
+        } catch (error) {
+            console.error("Ошибка отправки заказа:", error);
+            setSubmitError("Произошла ошибка при оформлении заказа. Пожалуйста, попробуйте еще раз.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
+    const totalPrice = cartItems.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
+
     return (
-        <section className="checkout">
-            <Container className="checkout__container">
-                <h1 className="checkout__title">Оформление заказа</h1>
+        <section className="checkout-section">
+            <Container className="checkout-container">
+                <h1 className="checkout-title">
+                    <FaShoppingBag className="me-2" />
+                    Оформление заказа
+                </h1>
+                
                 {cartItems.length > 0 ? (
-                    <div className="checkout__insidecont">
-                        <div className="checkout__formTitle">Личные данные</div>
-                        <div className="checkout__cont">
-                            <div className="checkout__datas">
-                                <Form onSubmit={handleSubmit} className="checkout__form">
-                                    <div className="checkout__personalDate">
-                                        <Form.Group>
-                                            <Form.Control 
-                                                type="text" 
-                                                name="name" 
-                                                placeholder="Имя и Фамилия" 
-                                                value={formData.name} 
-                                                onChange={handleInputChange} 
-                                                required 
-                                            />
-                                        </Form.Group>
-
-                                        <Form.Group>
-                                            <Form.Control 
-                                                type="tel" 
-                                                name="phone" 
-                                                placeholder="+7 (___) ___-__-__" 
-                                                value={formData.phone} 
-                                                onChange={handleInputChange} 
-                                                required 
-                                            />
-                                            {phoneError && <div className="text-danger small">{phoneError}</div>}
-                                        </Form.Group>
+                    <div className="checkout-content">
+                        <div className="checkout-form-container">
+                            <h2 className="section-title">
+                                <FaUser className="me-2" />
+                                Личные данные
+                            </h2>
+                            
+                            {submitError && <Alert variant="danger">{submitError}</Alert>}
+                            
+                            <Form onSubmit={handleSubmit} className="checkout-form">
+                                <Form.Group className="mb-4">
+                                    <Form.Label>Имя и Фамилия*</Form.Label>
+                                    <div className="input-with-icon">
+                                        <Form.Control 
+                                            type="text" 
+                                            name="name" 
+                                            placeholder="Иван Иванов" 
+                                            value={formData.name} 
+                                            onChange={handleInputChange} 
+                                            required 
+                                        />
+                                        <FaUser className="input-icon" />
                                     </div>
-                                    <div className="checkout__delivery">
-                                        <div className="checkout__formTitle">Доставка</div>
+                                </Form.Group>
 
-                                        <Form.Group>
-                                            <Form.Control 
-                                                type="text" 
-                                                name="address" 
-                                                placeholder="Адрес доставки" 
-                                                value={formData.address} 
-                                                onChange={handleInputChange} 
-                                                required 
-                                            />
-                                        </Form.Group>
+                                <Form.Group className="mb-4">
+                                    <Form.Label>Телефон*</Form.Label>
+                                    <div className="input-with-icon">
+                                        <Form.Control 
+                                            type="tel" 
+                                            name="phone" 
+                                            placeholder="+7 (___) ___-__-__" 
+                                            value={formData.phone} 
+                                            onChange={handleInputChange} 
+                                            required 
+                                        />
+                                        <FaPhone className="input-icon" />
                                     </div>
-                                </Form>
-                            </div>
+                                    {phoneError && <div className="error-message">{phoneError}</div>}
+                                </Form.Group>
 
-                            <div className="checkout__tovars">
-                                <ul className="checkout__list">
-                                    {cartItems.map((item, index) => (
-                                        <li key={index} className="checkout__item">
-                                            <div className="checkout__itemImageContainer">
-                                                <img src={item.image} alt={item.name} className="checkout__itemImage" />
-                                                <div className="checkout__text">
-                                                    <div className="checkout__titleblock">
-                                                        <div className="checkout__itemName">{item.name}</div>
-                                                        <div className="checkout__itemQuantity">Количество: {item.quantity || 1}</div>
-                                                    </div>
-                                                    <div className="checkout__itemDetails"></div>
-                                                    <div className="checkout__itemPrice">{item.price * (item.quantity || 1)} ₽</div>
-                                                </div>
+                                <Form.Group className="mb-4">
+                                    <Form.Label>Email (необязательно)</Form.Label>
+                                    <Form.Control 
+                                        type="email" 
+                                        name="email" 
+                                        placeholder="example@mail.com" 
+                                        value={formData.email} 
+                                        onChange={handleInputChange} 
+                                    />
+                                </Form.Group>
+
+                                <h2 className="section-title mt-5">
+                                    <FaMapMarkerAlt className="me-2" />
+                                    Способ получения
+                                </h2>
+                                
+                                <div className="delivery-options">
+                                    <Form.Check
+                                        type="radio"
+                                        id="delivery"
+                                        label="Доставка"
+                                        name="deliveryMethod"
+                                        value="delivery"
+                                        checked={formData.deliveryMethod === "delivery"}
+                                        onChange={handleInputChange}
+                                        className="delivery-option"
+                                    />
+                                    
+                                    <Form.Check
+                                        type="radio"
+                                        id="selfPickup"
+                                        label="Самовывоз"
+                                        name="deliveryMethod"
+                                        value="selfPickup"
+                                        checked={formData.deliveryMethod === "selfPickup"}
+                                        onChange={handleInputChange}
+                                        className="delivery-option"
+                                    />
+                                </div>
+                                
+                                {formData.deliveryMethod === "selfPickup" ? (
+                                    <div className="pickup-info">
+                                        <p><strong>Адрес самовывоза:</strong> ул. Пролетарская, д. 209 г. Краснодар</p>
+                                        <p><strong>Часы работы:</strong> Пн-Пт: 10:00-20:00, Сб-Вс: 11:00-18:00</p>
+                                    </div>
+                                ) : (
+                                    <Form.Group className="mb-4 mt-3">
+                                        <Form.Label>Адрес доставки*</Form.Label>
+                                        <Form.Control 
+                                            type="text" 
+                                            name="address" 
+                                            placeholder="Город, улица, дом, квартира" 
+                                            value={formData.address} 
+                                            onChange={handleInputChange} 
+                                            required={formData.deliveryMethod === "delivery"}
+                                        />
+                                    </Form.Group>
+                                )}
+                            </Form>
+                        </div>
+                        
+                        <div className="order-summary">
+                            <h2 className="section-title">Ваш заказ</h2>
+                            
+                            <div className="order-items">
+                                {cartItems.map((item, index) => (
+                                    <div key={index} className="order-item">
+                                        <img src={item.image} alt={item.name} className="item-image" />
+                                        <div className="item-details">
+                                            <h4 className="item-name">{item.name}</h4>
+                                            <div className="item-meta">
+                                                <span className="item-quantity">Кол-во: {item.quantity || 1}</span>
+                                                <span className="item-price">{item.price * (item.quantity || 1)} ₽</span>
                                             </div>
-                                        </li>
-                                    ))}
-                                </ul>
-
-                                <div className="checkout__totalPrice">Итого: {cartItems.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0)} ₽</div>
-                                <button 
-                                    onClick={handleSubmit} 
-                                    className="checkout__butn"
-                                    disabled={phoneError}
-                                >
-                                    Оформить заказ
-                                </button>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
+                            
+                            <div className="order-total">
+                                <div className="total-row">
+                                    <span>Итого:</span>
+                                    <span className="total-price">{totalPrice} ₽</span>
+                                </div>
+                                
+                                {formData.deliveryMethod === "delivery" && (
+                                    <div className="total-row">
+                                        <span>Доставка:</span>
+                                        <span className="delivery-price">Бесплатно</span>
+                                    </div>
+                                )}
+                                
+                                <div className="total-row grand-total">
+                                    <span>К оплате:</span>
+                                    <span>{totalPrice} ₽</span>
+                                </div>
+                            </div>
+                            
+                            <Button 
+                                onClick={handleSubmit} 
+                                className="submit-button"
+                                disabled={phoneError || isSubmitting}
+                            >
+                                {isSubmitting ? (
+                                    <>
+                                        <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                                        <span className="ms-2">Оформляем...</span>
+                                    </>
+                                ) : (
+                                    "Подтвердить заказ"
+                                )}
+                            </Button>
+                            
+                            <p className="security-note">
+                                Ваши данные защищены и не будут переданы третьим лицам
+                            </p>
                         </div>
                     </div>
                 ) : (
-                    <Container className="pustbasket">
-                        <div className="pustbasket__title">Ваша корзина пуста</div>
-                        <Link to="/">
-                            <button>Перейти к покупкам</button>
+                    <div className="empty-cart">
+                        <div className="empty-cart-icon">
+                            <FaShoppingBag />
+                        </div>
+                        <h3>Ваша корзина пуста</h3>
+                        <p>Выберите товары в нашем магазине</p>
+                        <Link to="/" className="continue-shopping">
+                            <Button variant="primary">Вернуться к покупкам</Button>
                         </Link>
-                    </Container>
+                    </div>
                 )}
             </Container>
 
             <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-                <Modal.Body className="text-center">
-                    <h4>Заказ успешно оформлен!</h4>
-                    <p>Вы будете перенаправлены на главную страницу...</p>
+                <Modal.Body className="text-center p-5">
+                    <div className="success-icon">
+                        <FaCheckCircle />
+                    </div>
+                    <h4 className="mt-3">Заказ успешно оформлен!</h4>
+                    <p className="text-muted">Мы свяжемся с вами в ближайшее время для подтверждения</p>
+                    <div className="progress-bar">
+                        <div className="progress"></div>
+                    </div>
                 </Modal.Body>
             </Modal>
         </section>
